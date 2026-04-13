@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE GATEWAY</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none; /* テキスト選択禁止（ハッカー感） */
+        }
+        .terminal-container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+        p {
+            margin: 8px 0;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+        .input-line {
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .prompt {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        input[type="password"] {
+            background: transparent;
+            border: none;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            outline: none;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            width: 250px;
+            letter-spacing: 5px;
+        }
+        .error {
+            color: #ff0000;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+            margin-top: 20px;
+            display: none;
+            font-weight: bold;
+        }
+        .blink {
+            animation: blinker 1s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
+        }
+        @keyframes blinker {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .matrix-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            opacity: 0.03;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                #0f0 2px,
+                #0f0 4px
+            );
+        }
+    </style>
+</head>
+<body onclick="document.getElementById('accessCode').focus()">
+    <div class="matrix-bg"></div>
+    <div class="terminal-container" id="terminal">
+        <p>ANOMALY INTELLIGENCE [SECURE GATEWAY v3.6.9]</p>
+        <p>Encrypted connection established.</p>
+        <p>Awaiting authentication protocol...</p>
+        <br>
+        <div class="input-line">
+            <span class="prompt">ENTER ACCESS CODE:</span>
+            <input type="password" id="accessCode" autocomplete="off" autofocus>
+            <span class="blink">█</span>
+        </div>
+        
+        <p class="error" id="errorMsg">ERROR: UNAUTHORIZED ACCESS ATTEMPT DETECTED.</p>
+    </div>
+
+    <script>
+        const inputField = document.getElementById('accessCode');
+        const errorMsg = document.getElementById('errorMsg');
+        const terminal = document.getElementById('terminal');
+
+        // クリック時など、常にフォーカスをInputに戻す（どこにも逃がさない）
+        document.addEventListener('click', () => {
+            if(document.activeElement !== inputField) {
+                inputField.focus();
+            }
+        });
+        
+        inputField.focus();
+
+        inputField.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const code = inputField.value;
+                if (code === '369567') {
+                    // 成功：ダッシュボードへ遷移
+                    terminal.innerHTML = '<p style="color: #fff; text-shadow: 0 0 10px #fff;">AUTHENTICATION SUCCESS.</p><p>Override engaged.</p><p>Connecting to Amaterasu Command Center...</p>';
+                    setTimeout(() => {
+                        window.location.href = '../amaterasu-ai/amaterasu_dashboard.html';
+                    }, 1200);
+                } else {
+                    // 失敗：エラーエフェクト
+                    errorMsg.style.display = 'block';
+                    inputField.value = '';
+                    
+                    // 背景を赤く光らせて威嚇
+                    document.body.style.backgroundColor = '#1a0000';
+                    setTimeout(() => {
+                        document.body.style.backgroundColor = '#050505';
+                    }, 150);
+
+                    // 数秒後にエラーメッセージを消す
+                    setTimeout(() => {
+                        errorMsg.style.display = 'none';
+                    }, 2500);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

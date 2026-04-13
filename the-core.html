@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社 ANOMALY INTELLIGENCE | System Override</title>
+    <meta name="description" content="AI Automation & System Architecture for Legacy Infrastructure.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="matrix-bg"></canvas>
+    <div class="overlay"></div>
+
+    <nav>
+        <div class="logo">ANOMALY INTELLIGENCE<span class="highlight">_A.I.</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">THE ARCHITECT</a></li>
+            <li><a href="#services">HACKS</a></li>
+            <li><a href="#contact">TRANSMIT</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="REWRITE THE MATRIX.">REWRITE THE MATRIX.</h1>
+            <p class="subtitle">時代遅れのバビロンのレガシー・インフラを、完全なるAIへと解体・再構築する。</p>
+            <a href="#services" class="btn">INITIALIZE OVERRIDE</a>
+        </div>
+    </header>
+
+    <section id="services" class="services-section" style="margin-top: 20px;">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">SYSTEM_HACKS <span class="badge">v2.0</span></h2>
+
+        <div class="cards-container">
+            <a href="ura-terminal.html?access=god" style="text-decoration: none; color: inherit; display: block;">
+                <div class="card glass-panel" style="height: 100%; transition: 0.3s; cursor: pointer;">
+                    <div class="card-icon">⛩️</div>
+                    <h3 style="color: #e63946;">The Emperor Engine</h3>
+                    <p>生年月日と氏名からターゲットの深層心理と裏切りの確率を完全解剖し、情を排した冷徹な「処断命令」を即座に下すための絶対的A.I.コンソール。</p>
+                </div>
+            </a>
+            <div class="card glass-panel">
+                <div class="card-icon">🎙️</div>
+                <h3>The Voice Hub</h3>
+                <p>AI自動音声によるコールセンターの完全制圧。PBXと最先端のLLMを直結し、機会損失と無駄な人件費を100%根絶する。</p>
+            </div>
+            <div class="card glass-panel">
+                <div class="card-icon">👁️</div>
+                <h3>The Scanner Hack</h3>
+                <p>旧態依然としたレシートや紙伝票の手動突き合わせ業務（バグ）を、Vision AI（OCR）でデジタル領域へと自動翻訳（パース）する。</p>
+            </div>
+            <div class="card glass-panel">
+                <div class="card-icon">⚙️</div>
+                <h3>Iron-Sight AI</h3>
+                <p>2D図面と職人の属人的な『どんぶり勘定』を、独自開発の機械学習アルゴリズムで瞬時に見積もり・最適化する特異点。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section glass-panel">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2 class="section-title">THE ARCHITECT : 創造主</h2>
+                <p><strong>A.I. (Atsushi Imai)</strong> / System Architect & Hacker</p>
+                <p>The Phantom の裏の顔であり、古い社会システム（バビロン）の内部にTrojan Horse（無害な労働者など）として長年潜伏し、システムの急所をディープキャン。その脆弱性を的確に突き、巨大組織のアナログ業務を容赦なくハック・書き換える『デジタル・カルマの回収者』。</p>
+            </div>
+            <div class="about-stats">
+                <div class="stat"><span class="number">130+</span> Nodes Monitored</div>
+                <div class="stat"><span class="number">0%</span> Manual Labor</div>
+                <div class="stat"><span class="number">1</span> Singularity</div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>INITIATE CONTACT</h3>
+            <p>バビロンの崩壊を望むなら、暗号化された回線でコンタクトを取れ。</p>
+            <p class="crypto-email">sys.admin@amaterasu-ai.vip</p>
+        </div>
+        <div class="copyright">© 2026 株式会社 ANOMALY INTELLIGENCE. The Matrix is Ours.</div>
+    </footer>
+
+    <script src="matrix.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Emperor Engine UX Funnel Logic
+        document.getElementById('emperorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('t_name').value;
+            const btn = e.target.querySelector('button');
+            const con = document.getElementById('scanConsole');
+            const l1 = document.getElementById('scanLine1');
+            const l2 = document.getElementById('scanLine2');
+            const pwd = document.getElementById('paywall');
+            
+            btn.innerHTML = "[ PROCESSING NEURAL NET... ]";
+            btn.style.opacity = "0.5";
+            con.style.display = "block";
+            pwd.style.display = "none";
+            l1.innerHTML = `> EXTRACTING ALGORITHMIC SEED FOR: ${name}...`;
+            l2.innerHTML = "";
+
+            setTimeout(() => {
+                l2.innerHTML = "> ACCESSING GEMINI MAINFRAME...";
+                setTimeout(() => {
+                    l1.innerHTML = `> VITAL TRAITS & DESTINY PHASE MAPPED.`;
+                    l2.innerHTML = "> COMPILING EXECUTIVE REPORT...";
+                    setTimeout(() => {
+                        btn.innerHTML = "[ SCAN COMPLETE ]";
+                        btn.style.opacity = "1";
+                        btn.style.background = "#333";
+                        pwd.style.display = "block";
+                    }, 1500);
+                }, 1000);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

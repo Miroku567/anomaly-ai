@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>次世代型AI『Antigravity』業務インフラ構築データシステム | ANOMALY INTELLIGENCE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Nova+Square&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; background-color: #f8fbff; color: #333; font-family: 'Noto Sans JP', sans-serif; }
+        header { background: #fff; border-bottom: 2px solid #0b4a8e; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .logo { color: #0b4a8e; font-weight: 900; font-size: 1.5rem; letter-spacing: 1px; }
+        .logo span { color: #666; }
+        .back-btn { color: #0b4a8e; text-decoration: none; border: 1px solid #0b4a8e; padding: 8px 15px; border-radius: 4px; transition: 0.3s; font-weight: bold; font-size: 0.9rem;}
+        .back-btn:hover { background: #0b4a8e; color: #fff; }
+        
+        .hero { background: #fff; border-bottom: 1px solid #ddd; padding: 60px 20px; text-align: center; }
+        .product-title { color: #0b4a8e; font-size: 1.5rem; font-weight: 900; max-width: 900px; margin: 0 auto; line-height: 1.5; padding: 30px; background: #f8fbff; border: 2px solid #0b4a8e; border-radius: 8px; box-shadow: 0 10px 20px rgba(11, 74, 142, 0.1); }
+        .product-title span { color: #e63946; font-family: 'Nova Square', sans-serif; font-size: 2.8rem; display: block; margin-top: 15px; letter-spacing: 2px;}
+        
+        .warning-box { border: 2px solid #e63946; background: #fff; color: #e63946; padding: 20px; border-radius: 8px; margin: 10px auto 40px; max-width: 850px; text-align: center; font-weight: bold; position: relative; z-index: 10; box-shadow: 0 10px 20px rgba(0,0,0,0.1); line-height: 1.6; font-size: 0.95rem; }
+        
+        .content-section { max-width: 900px; margin: 0 auto; padding: 20px 20px 80px; }
+        .content-section h2 { color: #0b4a8e; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 30px; font-size: 1.6rem; letter-spacing: 1px; font-weight: 900;}
+        
+        .text-block { background: #fff; padding: 35px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 40px; font-size: 1.05rem; line-height: 1.9; color: #444; border-left: 5px solid #0b4a8e; box-shadow: 0 5px 15px rgba(0,0,0,0.03);}
+        .text-block h3 { color: #0b4a8e; margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
+        .text-block strong { color: #0b4a8e; }
+        
+        .plans-container { display: flex; flex-direction: column; gap: 20px; margin-bottom: 50px; }
+        .tier-card { border: 1px solid #ddd; padding: 30px; border-radius: 8px; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: 0.3s; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
+        .tier-300 { border-top: 5px solid #888; }
+        .tier-600 { border-top: 5px solid #0b4a8e; }
+        .tier-900 { border-top: 5px solid #e63946; background: #fff9f9; }
+        
+        .tier-price { font-size: 2.2rem; font-weight: 900; font-family: 'Nova Square', sans-serif; margin-bottom: 5px; }
+        .tier-subtitle { font-size: 1rem; color: #666; margin-bottom: 20px; font-weight: bold; }
+        .tier-300 .tier-price { color: #555; }
+        .tier-600 .tier-price { color: #0b4a8e; }
+        .tier-900 .tier-price { color: #e63946; }
+        
+        .tier-desc { font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px; color: #333; }
+        .tier-image-hint { font-size: 0.95rem; color: #555; background: #f5f5f5; padding: 15px; border-radius: 4px; border: 1px dashed #aaa; display: flex; align-items: center; gap: 10px; font-weight: bold;}
+        .tier-image-hint::before { content: '💡'; font-size: 1.2rem; }
+        
+        .timeline { list-style: none; padding: 0; background: #fff; padding: 30px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 5px 15px rgba(0,0,0,0.03);}
+        .timeline li { display: flex; margin-bottom: 20px; align-items: flex-start; line-height: 1.6; }
+        .timeline li:last-child { margin-bottom: 0; }
+        .timeline-num { font-weight: 900; color: #fff; background: #0b4a8e; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-right: 15px; flex-shrink: 0; }
+        
+        .cta-container { text-align: center; margin-top: 60px; padding-top: 40px; border-top: 1px solid #ddd; }
+        .buy-btn { display: inline-block; padding: 18px 50px; background: #e63946; color: #fff; font-weight: 900; font-size: 1.3rem; text-decoration: none; border-radius: 4px; box-shadow: 0 4px 15px rgba(230,57,70,0.3); transition: all 0.3s; letter-spacing: 2px; }
+        .buy-btn:hover { background: #c32d3a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230,57,70,0.4);}
+
+        /* 銀行へのプリントアウト提出用最適化（3ページへの圧縮） */
+        @media print {
+            body { font-size: 10.5pt; color: #000; background: #fff; }
+            .hero { padding: 15px 10px; border-bottom: none; }
+            .product-title { padding: 15px; font-size: 1.25rem; box-shadow: none; border: 1px solid #000; }
+            .product-title span { font-size: 1.8rem; margin-top: 5px; }
+            .content-section { padding: 10px 0; margin: 0; }
+            .content-section h2 { margin-bottom: 10px; padding-bottom: 5px; font-size: 1.2rem; }
+            .text-block { padding: 10px 15px; margin-bottom: 10px; font-size: 0.95rem; line-height: 1.45; border: 1px solid #888; border-left: 4px solid #0b4a8e; box-shadow: none; }
+            .text-block h3 { margin-bottom: 8px; font-size: 1.1rem; padding-bottom: 4px; }
+            ul { margin-bottom: 5px; }
+            .plans-container { flex-direction: row; gap: 10px; margin-bottom: 15px; }
+            .tier-card { padding: 10px; box-shadow: none; border: 1px solid #888; flex: 1; min-width: 0; page-break-inside: avoid; }
+            .tier-card img { width: 70px; display: none; } /* スペース節約のため印刷時は画像を非表示 */
+            .tier-price { font-size: 1.3rem; }
+            .tier-subtitle { font-size: 0.85rem; margin-bottom: 8px; }
+            .tier-desc { font-size: 0.85rem; line-height: 1.3; margin-bottom: 0; }
+            .timeline { padding: 10px 15px; margin-bottom: 10px; border: 1px solid #888; box-shadow: none; }
+            .timeline li { margin-bottom: 8px; line-height: 1.35; font-size: 0.9rem; align-items: flex-start; }
+            .timeline-num { width: 20px; height: 20px; font-size: 0.8rem; margin-right: 10px; margin-top: 2px;}
+            header { padding: 5px 20px; position: static; border-bottom: 2px solid #000; }
+            .back-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ANOMALY INTELLIGENCE <span>A.I. Solutions</span></div>
+        <a href="index.html" class="back-btn">← ポータルへ戻る</a>
+    </header>
+
+    <div class="hero">
+        <h1 class="product-title">
+            次世代型AI業務インフラ構築データシステム
+            <span>『Antigravity』</span>
+        </h1>
+    </div>
+
+
+
+    <div class="content-section">
+
+        <div class="text-block">
+            <h3>■ アノマリー基本理念：人間の創造的・戦略的業務へのリソース集中</h3>
+            反復的な実務処理や書類作成・リサーチ作業は完全にAIに代替させることで、経営陣およびスタッフの時間を本来の創造的で戦略的な業務にのみ集中させます。<br>
+            プログラマー専門の超高度AIをコード知識ゼロの一般の方でも自在に操れる<strong>【自律インフラ】</strong>をAIオペレーター・敦史今井がご教授いたします。
+        </div>
+
+        <div class="text-block">
+            <h3>■ 自律型コアシステム『Antigravity』の実装能力</h3>
+            当社の専用AIエンジン【自律型AI『Antigravity』】を貴社の専用インフラとして導入するマスターパッケージです。
+            <ul style="color: #0b4a8e; margin-top: 10px; margin-bottom: 20px; font-weight: bold; line-height: 1.8;">
+                <li><span style="color:#444">製造業等の図面解析からの見積書・請求書作成、および在庫管理の全自動サポート</span></li>
+                <li><span style="color:#444">会計・税務等の圧倒的な全自動リサーチ＆計算サポート</span></li>
+                <li><span style="color:#444">司法書士レベルに匹敵する高度な法的知識検索・文書作成の極限サポート</span></li>
+                <li><span style="color:#444">膨大な統計学および行動心理学データに基づく、高精度な人事・適性評価プロファイリングと組織最適化サポート</span></li>
+                <li><span style="color:#444">西洋医学・東洋医学・漢方薬理など、膨大な医療データベースを統合した極限の健康管理・予防医学リサーチ</span></li>
+                <li><span style="color:#444">世界の競技データと生体解析に基づく、アスリートの勝率と潜在能力を極限まで引き出すスポーツプロファイリング</span></li>
+                <li><span style="color:#444">難関大学受験から各種国家資格まで、あらゆる専門教育データに基づく極限の学習・教育サポート</span></li>
+                <li><span style="color:#444">最先端の栄養薬理学と世界中の伝統レシピデータに基づく、究極の食の最適化・フードアナリティクス</span></li>
+                <li><span style="color:#444">日本庭園（枯山水）の数理的アルゴリズム設計や、空間認識データに基づく美的最適化の支援</span></li>
+                <li><span style="color:#444">陶芸・焼き物における釉薬の最適配合、および焼成温度のデータパラメーターによる完全制御プロファイル</span></li>
+                <li><span style="color:#444">宮大工等の伝統的建築意匠の3D構造解析や、美術品・骨董の市場データ解析に基づく価値予測サポート</span></li>
+            </ul>
+            <p style="font-size: 0.9rem; color: #888;">（※本製品はリサーチ特化ツールであり税理士法や弁護士法に抵触する税務・法務の独占代行業務は行いません。専門家依頼前の「完璧な基礎構築」を即座に完了させます）</p>
+        </div>
+
+        <h2 style="page-break-before: always;">プランの差別化（本商品は最良の入門構成です）</h2>
+        
+        <div class="text-block" style="padding: 20px; font-size: 0.95rem; border-color: #aaa; background-color: #fbfbfb; margin-bottom: 25px; box-shadow: none;">
+            <strong style="color: #333; font-size: 1.05rem; display: inline-block; margin-bottom: 8px;">【AIインフラ投資としての圧倒的なコスト優位性】</strong><br>
+            通常、大手ITベンダー（SIer）に同規模のAI業務自動化システム（DX）の構築を依頼した場合、要件定義と開発フェーズのみで<strong>初期費用1,000万円以上</strong>に加え、永続的な月額保守費用（数十万円〜）が発生します。<br>
+            当社の『Antigravityインフラ・パッケージ』は、これらを完全にスキップし、<strong>「最適化された最新機材（物理Mac）の調達費用」「初期システム構築」「商用永久ライセンス」「完全自律化に到達するまでの専用コンサルティング費用」をすべて含んだ【オールインワンの定額パッケージ】</strong>でご提供します。これにより、従来のシステム開発とは比較にならない短期間・低コストでの稼働を実現します。<br><br>
+            <strong style="color: #333; font-size: 1.05rem; display: inline-block; margin-bottom: 8px;">【圧倒的低コストを実現する「単独最適化体制」】</strong><br>
+            大手によるシステム構築は、複数名のチーム（プログラマー、関連担当者等）による多重構造で数ヶ月の期間と莫大な人件費を要します。<br>
+            当社は、AIシステム自体を熟知した「専任オペレーター・敦史今井」が高度AIと完全に同期し、要件定義から実機構築、運用サポートまでの全工程を<strong>自発的・単独かつ一気通貫</strong>で完遂します。これにより、無駄な人的コストとコミュニケーションロスを全排除し、大手水準の強固なAIインフラを現在の低コストなパッケージ価格で提供・即稼働可能にしています。
+        </div>
+
+        <div class="plans-container">
+            <!-- 300万円プラン -->
+            <div class="tier-card tier-300">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <div class="tier-price" style="margin-top: 0;">3,000,000 JPY</div>
+                        <div class="tier-subtitle">サポート1ヶ月 / PC中級者様向け / Mac1台体制の現地インストール</div>
+                        <div class="tier-desc" style="margin-top: 15px;">
+                            <strong>■ 自律型コアシステム『Antigravity』の実装能力</strong><br>
+                            メモリ16GB・容量512GB以上の高スペックMac（1台）をご用意いただき、直接インストール。<br>
+                            単一の端末に最高峰ブレインを接続し、実務を全自動化します。
+                        </div>
+                    </div>
+                    <img src="images/tier_300.png" alt="The Key" style="width: 160px; height: auto; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); flex-shrink: 0; margin-top: 6px;">
+                </div>
+            </div>
+
+            <!-- 600万円プラン -->
+            <div class="tier-card tier-600">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <div class="tier-price" style="margin-top: 0;">6,000,000 JPY</div>
+                        <div class="tier-subtitle">サポート2ヶ月 / 初心者・素人様向け / 専用Mac2台体制の現地セッティング</div>
+                        <div class="tier-desc" style="margin-top: 15px;">
+                            <strong>■ 『Antigravity』搭載ハードの能力</strong><br>
+                            用途に最適な新品Mac（計2台）をご用意いただき、現地でシステム構築。<br>
+                            購入前の機材指示から初稼働まで、専門知識ゼロでも完全アシストします。
+                        </div>
+                    </div>
+                    <img src="images/tier_600.png" alt="The Box" style="width: 160px; height: auto; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); flex-shrink: 0; margin-top: 6px;">
+                </div>
+            </div>
+
+            <!-- 900万円プラン -->
+            <div class="tier-card tier-900">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <div class="tier-price" style="margin-top: 0;">9,000,000 JPY</div>
+                        <div class="tier-subtitle">サポート3ヶ月 / 本格企業向け / 最上位Mac3台体制の現地導入＋徹底伴走</div>
+                        <div class="tier-desc" style="margin-top: 15px;">
+                            <strong>■ インフラのコアシステム実装能力</strong><br>
+                            用途に応じた最上位Mac（計3台）を用意いただき、専任オペレーターが3ヶ月完全伴走。<br>
+                            機材選定の指示から全アナログ業務の解放まで、自社の変革を導きます。
+                        </div>
+                    </div>
+                    <img src="images/tier_900.png" alt="The Partnership" style="width: 160px; height: auto; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); flex-shrink: 0; margin-top: 6px;">
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-block" style="border-left-color: #e63946;">
+            <h3 style="color: #e63946;">■ 弊社からのメッセージ</h3>
+            本システムの構築費用は決して安価ではありませんが、これは単なるツールの購入ではなく、「今後数十年にわたり発生し続ける莫大な人件費とヒューマンエラーを完全に排除し、御社の利益を底上げする」ための確実なインフラ投資です。<br>
+            導入機材の選定から御社独自の業務データへの最適化、そしてシステムが完全に自律稼働する次元に到達するまで、私共が責任あるコンサルティングと実装サポートをお約束いたします。
+        </div>
+
+        <h2 style="page-break-before: always;">自律化プロセス＆継続コンサルティング</h2>
+        
+        <div class="text-block">
+            <h3>■ プラン期間経過後の「月額顧問コンサルティング」について</h3>
+            各プランの規定サポート期間（1〜3ヶ月）は、御社がAIを完全に自律運用するための初期移行期間です。<br>
+            万が一、期間内にシステムの独立稼働に至らず、引き続き専任技術者による直接的な実務代行や伴走をご希望される場合は、導入プランの規模（1台〜3台体制）に応じた以下の**月額顧問契約**へ移行させていただきます。<br>
+            <br>
+            <strong>【継続顧問コンサルティング費用】</strong><br>
+            ・300万円プラン導入企業様：<strong>月額 300,000 JPY</strong><br>
+            ・600万円プラン導入企業様：<strong>月額 600,000 JPY</strong><br>
+            ・900万円プラン導入企業様：<strong>月額 900,000 JPY</strong>
+        </div>
+
+        <ul class="timeline">
+            <li><div class="timeline-num">1</div><div><strong>【導入審査・面談】（現状課題のヒアリング）</strong></div></li>
+            <li><div class="timeline-num">2</div><div><strong>「秘密保持・運用顧問契約」の電子締結および決済手続</strong></div></li>
+            <li><div class="timeline-num">3</div><div><strong>当機関からの指定スペックに基づく、お客様ご自身での機材（Mac）のご準備</strong></div></li>
+            <li><div class="timeline-num">4</div><div><strong>専任オペレーターが御社オフィス（またはご自宅等）へ直接出向き、ゼロから専用AI『Antigravity』を完全構築</strong></div></li>
+            <li><div class="timeline-num">5</div><div><strong>規定期間内での「システム自律化」に向けた専任オペレーターによる運用サポート開始（初日の実機構築以降は、Zoomや専用チャット等による完全リモート伴走へ移行します）</strong></div></li>
+        </ul>
+        
+
+
+    </div>
+
+</body>
+</html>

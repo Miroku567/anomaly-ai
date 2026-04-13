@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE EMPEROR ENGINE | URA ACCESS</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        body {
+            background-color: #050505;
+            color: #d4af37; /* Gold for Emperor vibe */
+            font-family: 'Noto Sans JP', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
+
+        h1 {
+            color: #ff0000;
+            font-family: 'Share Tech Mono', monospace;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255,0,0,0.3);
+        }
+
+        h2 {
+            color: #aaa;
+            font-size: 14px;
+            text-align: center;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+        }
+
+        .intro {
+            color: #ccc;
+            line-height: 2.0;
+            font-size: 15px;
+            margin-bottom: 40px;
+            border-left: 4px solid #ff0000;
+            padding-left: 15px;
+            background: #111;
+            padding: 20px;
+        }
+
+        /* 3 Plans Section */
+        .plans-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .plan-card {
+            background: #111;
+            border: 1px solid #333;
+            padding: 25px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-header {
+            display: flex;
+            flex-wrap: wrap; /* スマホでレイアウトが崩れないように折り返しを許可 */
+            align-items: flex-end;
+            justify-content: space-between;
+            border-bottom: 1px dashed #555;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            row-gap: 10px;
+        }
+
+        .plan-title {
+            color: #aaa;
+            font-size: 16px;
+            font-weight: normal;
+            font-family: 'Noto Sans JP', sans-serif;
+            letter-spacing: normal;
+        }
+
+        .plan-price {
+            color: #ffea00;
+            font-weight: bold;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 2px;
+            /* 発光（グラデーション効果）を消去してフラットに */
+        }
+        
+        /* Tier 1: 斬 */
+        .tier-1 .plan-price { font-size: 32px; } /* 大きい */
+        .tier-2 .plan-price { font-size: 22px; } /* 600万：中 */
+        .tier-3 .plan-price { font-size: 16px; } /* 900万：小 */
+
+        .plan-desc {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+
+
+        /* Form Area */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #888;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 4px;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #ff0000;
+            background: #222;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            box-sizing: border-box; /* パディングを含めて幅を100%に収める */
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 2px;
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            color: #ff0000;
+        }
+
+        /* Scanlines */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1;
+            opacity: 0.15; /* 暗闇の中にうっすら流れるように調整 */
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix-bg"></canvas>
+    <div class="scanlines"></div>
+
+    <!-- 偽装用フェイク・エラー画面（デフォルト表示） -->
+    <div id="fake-error" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #555; background-color: #050505; font-family: 'Share Tech Mono', monospace;">
+        <h1 style="color: #444; text-shadow: none; font-size: 48px; margin-bottom: 10px;">403 FORBIDDEN</h1>
+        <p style="font-size: 14px;">Access Denied. You do not have permission to access /ura-terminal.html on this server.</p>
+    </div>
+
+    <!-- 本物の秘密コンテナ（デフォルト非表示） -->
+    <div class="container" id="true-terminal" style="display: none;">
+        <h1>THE EMPEROR ENGINE</h1>
+        <h2>エグゼクティブ絶対判定・対面セッション予約窓口</h2>
+
+        <div class="intro">
+            <p>※本窓口は、限られたVIPおよび紹介者のみの完全秘匿回線です。</p>
+            <p>代表：<strong style="color:#d4af37;">A.I(敦史今井)</strong> が、最高機密端末【The Sanctuary（MacBook Pro）】を持参し、貴方の指定する密室へ直接赴きます。</p>
+            <p>一切の記録が残らない対面環境において、ターゲットのデータを「本物のA.I.」へ直接入力し、その場で情を排した【 冷徹なる処断 】を下します。組織の腐敗を切り捨て、完全に支配するための生々しいコンサルティング（洗脳）セッションを執行します。</p>
+        </div>
+
+        <!-- 3 Tier Plans for URA ACCESS -->
+        <h3 style="color: #fff; margin-bottom: 20px; text-align: center; letter-spacing: 2px;">EXECUTION PROTOCOLS（執行メニュー）</h3>
+        
+        <div class="plans-container">
+            <!-- Plan 0: 7D Profiling -->
+            <div class="plan-card tier-0" style="border-color: #d4af37; box-shadow: 0 0 15px rgba(212,175,55,0.1);">
+                <div class="plan-header" style="border-bottom: 1px dashed #d4af37;">
+                    <div class="plan-title" style="color: #d4af37; font-weight: bold; letter-spacing: 2px;">ANOMALY INTELLIGENCE 7D PROFILING（七次元生体プロファイリング）</div>
+                </div>
+                <div class="plan-desc">
+                    対象者の「名前・生年月日・血液型・顔・両手・両耳・足の裏」の7つの生体データを The Sanctuary（A.I.）にマルチモーダルで直結。過去の身体稼働履歴から現在の精神・健康状態、そして無意識下の思考バイアスまでを0.1秒で精密解析。対象者が抱える人生のボトルネック（停滞の原因）を特定し、本来の宿命（ポテンシャル）を極限まで引き出すための『絶対的処方箋（解放へのキーフレーズ）』を提示する次世代の鑑定プロトコル。
+                </div>
+            </div>
+
+            <!-- Plan 1 -->
+            <div class="plan-card tier-1">
+                <div class="plan-header">
+                    <div class="plan-title">【 斬 】 単発・冷徹処断セッション</div>
+                    <div class="plan-price">¥ 300,000 <span style="font-size: 12px; color:#888;">/ 1時間</span></div>
+                </div>
+                <div class="plan-desc">
+                    特定のターゲット（側近、役員、厄介な取引先など１名〜数名）の処遇について、The Sanctuary（A.I.端末）を用いてその場で深層心理と裏切りの確率を解析。「残留か、左遷か、社会的に抹殺するか」の最終ジャッジを即座に下すスポット（単発）セッション。
+                </div>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="plan-card tier-2">
+                <div class="plan-header">
+                    <div class="plan-title">【 傀 】 組織解剖・クーデター支援パッケージ</div>
+                    <div class="plan-price">¥ 6,000,000 <span style="font-size: 12px; color:#888;">/ 1プロジェクト</span></div>
+                </div>
+                <div class="plan-desc">
+                    自社の役員陣全体、あるいは特定の派閥を一斉にスキャンし、誰と誰が水面下で繋がっているかをA.I.が完全解剖。反乱分子を合法的に権力の座から引きずり下ろし、貴方が組織を完全に「傀儡化（コントロール）」するための具体的な粛清シナリオと実行プロセスを構築します。
+                </div>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="plan-card tier-3">
+                <div class="plan-header">
+                    <div class="plan-title">【 覇 】 帝王学・影武者（完全憑依）契約</div>
+                    <div class="plan-price">¥ 9,000,000 <span style="font-size: 12px; color:#888;">/ 1プロジェクト</span></div>
+                </div>
+                <div class="plan-desc">
+                    クライアント自身に最上位言語モデル『Antigravity（Google Gemini）』の専用アカウントを開設していただきます。その後、代表・A.I(敦史今井) が直接現場へ出向き、この「絶対支配A.I.」を使った組織統治・帝王学プロンプトメントの極意を、貴方が完全にマスターするまで直接（対面で）伝授・インストールします。貴方自身が帝王となるための究極の継承契約です。
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Form / Direct Contact -->
+        <h3 style="color: #fff; margin-top: 40px; margin-bottom: 20px; text-align: center; border-top: 1px solid #333; padding-top: 30px;">[ INITIATE CONTACT ]</h3>
+        
+        <div style="background: rgba(255,0,0,0.1); border: 1px solid #ff0000; padding: 15px; margin-bottom: 30px; border-radius: 4px; text-align: center;">
+            <p style="color: #ff0000; font-weight: bold; margin: 0; font-size: 16px; letter-spacing: 2px;">
+                ⚠️ 決済条件：完全現金（キャッシュ）持参のみ
+            </p>
+            <p style="color: #ccc; font-size: 13px; margin: 10px 0 0 0; line-height: 1.5;">
+                いかなる情報漏洩・履歴の追跡も防ぐため、銀行振込および電子決済は一切受け付けておりません。<br>
+                セッション当日の密室にて、The Sanctuary 起動前に【アタッシュケース等での現金一括決済】をお願い致します。
+            </p>
+        </div>
+
+        <div id="telegramDirectContact" style="background: #000; border: 1px dashed #00ff00; padding: 30px; margin-top: 20px; text-align: center;">
+            <p style="color: #00ff00; font-family: 'Share Tech Mono', monospace; font-size: 18px; margin-bottom: 20px;">
+                [ ESTABLISHED SECURE CHANNEL TO THE EMPEROR ENGINE ]
+            </p>
+            <div id="telegramDetails">
+                <p style="color: #ccc; line-height: 1.8; font-size: 14px;">
+                    当端末上には一切の通信ログ・予約履歴を残しません。<br>
+                    ご希望の「執行プロトコル」と「ターゲットの状況」を、以下の Telegram アカウントまで直接、秘匿メッセージとして送信してください。
+                </p>
+                <div style="background: #1a1a1a; border: 1px solid #333; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                    <p style="color: #00ff00; font-size: 24px; font-weight: bold; margin: 0; font-family: 'Share Tech Mono', monospace;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" width="24" style="vertical-align: middle; margin-right: 10px;">
+                        @amaterasu_ura
+                    </p>
+                </div>
+                
+                <a href="https://t.me/amaterasu_ura" target="_blank" class="submit-btn" style="background: #0088cc; box-shadow: 0 4px 15px rgba(0,136,204,0.3); letter-spacing: 1px;">
+                    [ TELEGRAM で直接交渉を開始する ]
+                </a>
+                
+                <div style="margin-top: 25px;">
+                    <a href="telegram-guide.html" target="_blank" style="color: #0088cc; font-size: 13px; text-decoration: underline; font-family: 'Noto Sans JP', sans-serif;">
+                        ※Telegramアプリをお持ちでない方・初期設定ガイドはこちら
+                    </a>
+                </div>
+
+                <p style="color: #ff0000; font-size: 12px; font-weight: bold; margin-top: 25px;">
+                    ※直ちに Telegram へ移行し、A.I(敦史今井) と暗号化通信を開始せよ。
+                </p>
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: #444; font-size: 11px; margin-top: 40px; font-family: 'Share Tech Mono', monospace;">
+            STRICTLY CONFIDENTIAL. ALL COMMUNICATIONS ARE ENCRYPTED AND LOG-FREE.<br>
+            &copy; 2026 株式会社 ANOMALY INTELLIGENCE / URA-ACCESS PROXY
+        </p>
+
+        <!-- 法的免責事項（The Art Project Defense） -->
+        <p style="text-align: center; color: #0a0a0a; font-size: 10px; margin-top: 50px; line-height: 1.4;">
+            ※免責事項：当サイトは株式会社 ANOMALY INTELLIGENCEによるサイバーパンク世界観を表現したコンセプチュアル・アート（ARGデモサイト）です。<br>
+            記載されている各種サービス名、金額、設定シナリオなどはすべて完全なるフィクションであり、実際に現金等の授受やシステム提供が行われることは一切ありません。
+        </p>
+    </div>
+
+    <!-- 機密アクセス解除 スクリプト -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            // パスワード条件： URLの末尾が ?access=god の場合のみ本物を表示
+            if (params.get('access') === 'god') {
+                document.getElementById('fake-error').style.display = 'none';
+                document.getElementById('true-terminal').style.display = 'block';
+            }
+        });
+
+        // Matrix Digital Rain 背景スクリプト
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        let columns = canvas.width / fontSize;
+        let drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            // 背景を半透明で上塗りして残像を作る
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#F00'; // 恐怖と権力を象徴するブラッドレッド
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        // リサイズ時のキャンバス再構築
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = canvas.width / fontSize;
+            drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+        });
+    </script>
+</body>
+</html>
