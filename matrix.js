@@ -26,13 +26,13 @@ function draw() {
     for (let i = 0; i < drops.length; i++) {
         const text = characters[Math.floor(Math.random() * characters.length)];
         
-        // Make the leading character bright red/white, tail orange
+        // Make the leading character bright green, tail darker green
         if (Math.random() > 0.95) {
-            ctx.fillStyle = '#ff6600'; // brighter orange drop head
+            ctx.fillStyle = '#00ff41'; // brighter green drop head
             ctx.shadowBlur = 10;
-            ctx.shadowColor = '#ff3300';
+            ctx.shadowColor = '#00ff00';
         } else {
-            ctx.fillStyle = '#cc2900'; // deeper red/orange tail
+            ctx.fillStyle = '#008f11'; // deeper green tail
             ctx.shadowBlur = 0;
         }
 

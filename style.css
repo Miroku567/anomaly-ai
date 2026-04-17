@@ -1,10 +1,10 @@
 :root {
     --bg-color: #030303;
     --text-color: #e0e0e0;
-    --accent-primary: #ff3300; /* Amaterasu intense Sun Orange/Red */
-    --accent-glow: #ff5500;
+    --accent-primary: #00ff41; /* Protocol Green */
+    --accent-glow: #00ff00;
     --glass-bg: rgba(15, 15, 15, 0.7);
-    --glass-border: rgba(255, 51, 0, 0.3);
+    --glass-border: rgba(0, 255, 65, 0.3);
 }
 
 * {
@@ -44,7 +44,7 @@ body {
 /* Navbar */
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 20px 50px;
     background: rgba(0,0,0,0.85);
@@ -117,7 +117,7 @@ nav {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 51, 0, 0.2) inset;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2) inset;
 }
 .btn:hover {
     background: var(--accent-primary);
@@ -172,7 +172,7 @@ section { padding: 100px 10%; max-width: 1200px; margin: 0 auto; }
 .card:hover {
     transform: translateY(-10px);
     border-color: var(--accent-primary);
-    box-shadow: 0 10px 30px rgba(255, 51, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.15);
 }
 .card-icon {
     font-size: 3rem;
@@ -205,7 +205,7 @@ section { padding: 100px 10%; max-width: 1200px; margin: 0 auto; }
     padding-left: 30px;
 }
 .stat { font-family: 'Share Tech Mono', monospace; color: #777; font-size: 0.8rem; text-transform: uppercase;}
-.stat .number { display: block; font-size: 2.5rem; color: var(--accent-primary); font-weight: bold; margin-bottom: 5px; text-shadow: 0 0 10px rgba(255,51,0,0.5); }
+.stat .number { display: block; font-size: 2.5rem; color: var(--accent-primary); font-weight: bold; margin-bottom: 5px; text-shadow: 0 0 10px rgba(0,255,65,0.5); }
 
 /* Footer */
 footer {

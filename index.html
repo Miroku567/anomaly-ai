@@ -3,136 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SECURE GATEWAY</title>
-    <style>
-        body {
-            background-color: #050505;
-            color: #0f0;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            user-select: none; /* テキスト選択禁止（ハッカー感） */
-        }
-        .terminal-container {
-            width: 90%;
-            max-width: 800px;
-            padding: 20px;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-        }
-        p {
-            margin: 8px 0;
-            font-size: 1.2rem;
-            line-height: 1.5;
-        }
-        .input-line {
-            display: flex;
-            align-items: center;
-            margin-top: 30px;
-        }
-        .prompt {
-            margin-right: 15px;
-            font-size: 1.2rem;
-        }
-        input[type="password"] {
-            background: transparent;
-            border: none;
-            color: #0f0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.2rem;
-            outline: none;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-            width: 250px;
-            letter-spacing: 5px;
-        }
-        .error {
-            color: #ff0000;
-            text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
-            margin-top: 20px;
-            display: none;
-            font-weight: bold;
-        }
-        .blink {
-            animation: blinker 1s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
-        }
-        @keyframes blinker {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-        .matrix-bg {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -1;
-            opacity: 0.03;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                #0f0 2px,
-                #0f0 4px
-            );
-        }
-    </style>
+    <title>株式会社 ANOMALY INTELLIGENCE | System Override</title>
+    <meta name="description" content="AI Automation & System Architecture for Legacy Infrastructure.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-<body onclick="document.getElementById('accessCode').focus()">
-    <div class="matrix-bg"></div>
-    <div class="terminal-container" id="terminal">
-        <p>ANOMALY INTELLIGENCE [SECURE GATEWAY v3.6.9]</p>
-        <p>Encrypted connection established.</p>
-        <p>Awaiting authentication protocol...</p>
-        <br>
-        <div class="input-line">
-            <span class="prompt">ENTER ACCESS CODE:</span>
-            <input type="password" id="accessCode" autocomplete="off" autofocus>
-            <span class="blink">█</span>
+<body style="overflow: hidden;">
+    <canvas id="matrix-bg"></canvas>
+    <div class="overlay"></div>
+
+    <nav>
+        <div class="logo">ANOMALY INTELLIGENCE INC.</div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="REWRITE THE MATRIX.">REWRITE THE MATRIX.</h1>
+            <p class="subtitle">時代遅れのバビロンのレガシー・インフラを、完全なるAIへと解体・再構築する。</p>
+            <form id="access-terminal" style="margin-top: 40px;">
+                <input type="password" id="access-code" placeholder="" autocomplete="off" style="background: rgba(0,0,0,0.5); border: 1px solid var(--accent-primary); color: var(--accent-primary); padding: 15px 20px; font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; text-align: center; width: 300px; outline: none; box-shadow: 0 0 10px rgba(0,255,65,0.2) inset; transition: transform 0.1s;">
+                <div style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--accent-primary); opacity: 0.6; margin-top: 8px; letter-spacing: 1px;">[ ENTER ACCESS CODE ]</div>
+                <div id="access-msg" style="color: #ff0041; font-family: 'Share Tech Mono', monospace; margin-top: 8px; height: 20px; text-shadow: 0 0 5px #ff0041;"></div>
+            </form>
         </div>
-        
-        <p class="error" id="errorMsg">ERROR: UNAUTHORIZED ACCESS ATTEMPT DETECTED.</p>
-    </div>
+    </header>
 
+
+
+    <footer style="position: absolute; bottom: 0; width: 100%; padding: 20px; background: transparent; border: none;">
+        <div class="copyright" style="margin-top: 0;">© 2026 株式会社 ANOMALY INTELLIGENCE. The Matrix is Ours.</div>
+    </footer>
+
+    <script src="matrix.js"></script>
     <script>
-        const inputField = document.getElementById('accessCode');
-        const errorMsg = document.getElementById('errorMsg');
-        const terminal = document.getElementById('terminal');
-
-        // クリック時など、常にフォーカスをInputに戻す（どこにも逃がさない）
-        document.addEventListener('click', () => {
-            if(document.activeElement !== inputField) {
-                inputField.focus();
-            }
-        });
+        const form = document.getElementById('access-terminal');
+        const codeInput = document.getElementById('access-code');
+        const accessMsg = document.getElementById('access-msg');
         
-        inputField.focus();
-
-        inputField.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                const code = inputField.value;
-                if (code === '369567') {
-                    // 成功：ダッシュボードへ遷移
-                    terminal.innerHTML = '<p style="color: #fff; text-shadow: 0 0 10px #fff;">AUTHENTICATION SUCCESS.</p><p>Override engaged.</p><p>Connecting to Amaterasu Command Center...</p>';
-                    setTimeout(() => {
-                        window.location.href = '../amaterasu-ai/amaterasu_dashboard.html';
-                    }, 1200);
-                } else {
-                    // 失敗：エラーエフェクト
-                    errorMsg.style.display = 'block';
-                    inputField.value = '';
-                    
-                    // 背景を赤く光らせて威嚇
-                    document.body.style.backgroundColor = '#1a0000';
-                    setTimeout(() => {
-                        document.body.style.backgroundColor = '#050505';
-                    }, 150);
-
-                    // 数秒後にエラーメッセージを消す
-                    setTimeout(() => {
-                        errorMsg.style.display = 'none';
-                    }, 2500);
-                }
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const code = codeInput.value;
+            if (code === '369567') {
+                accessMsg.style.color = '#00ff41';
+                accessMsg.style.textShadow = '0 0 5px #00ff41';
+                accessMsg.innerText = '> ACCESS GRANTED. REDIRECTING...';
+                setTimeout(() => {
+                    window.location.href = 'core.html';
+                }, 1000);
+            } else {
+                accessMsg.style.color = '#ff0041';
+                accessMsg.style.textShadow = '0 0 5px #ff0041';
+                accessMsg.innerText = '> ACCESS DENIED';
+                codeInput.value = '';
+                codeInput.style.transform = 'translateX(-10px)';
+                setTimeout(() => codeInput.style.transform = 'translateX(10px)', 50);
+                setTimeout(() => codeInput.style.transform = 'translateX(-10px)', 100);
+                setTimeout(() => codeInput.style.transform = 'translateX(10px)', 150);
+                setTimeout(() => codeInput.style.transform = 'translateX(0)', 200);
+                codeInput.blur();
             }
         });
     </script>
