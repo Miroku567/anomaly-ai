@@ -20,11 +20,21 @@
         <div class="hero-content">
             <h1 class="glitch" data-text="REWRITE THE MATRIX.">REWRITE THE MATRIX.</h1>
             <p class="subtitle">時代遅れのバビロンのレガシー・インフラを、完全なるAIへと解体・再構築する。</p>
-            <form id="access-terminal" style="margin-top: 40px;" action="javascript:void(0);">
-                <input type="password" id="access-code" placeholder="" autocomplete="off" style="background: rgba(0,0,0,0.5); border: 1px solid var(--accent-primary); color: var(--accent-primary); padding: 15px 20px; font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; text-align: center; width: 300px; outline: none; box-shadow: 0 0 10px rgba(0,255,65,0.2) inset; transition: transform 0.1s;">
-                <button type="submit" style="display: none;"></button>
-                <div style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--accent-primary); opacity: 0.6; margin-top: 8px; letter-spacing: 1px;">[ ENTER ACCESS CODE ]</div>
-                <div id="access-msg" style="color: #ff0041; font-family: 'Share Tech Mono', monospace; margin-top: 8px; height: 20px; text-shadow: 0 0 5px #ff0041;"></div>
+            <style>
+                .execute-btn:hover, .execute-btn:active {
+                    background: #ff0041 !important;
+                    color: #000 !important;
+                    text-shadow: none !important;
+                    box-shadow: 0 0 20px rgba(255, 0, 65, 0.8) !important;
+                }
+            </style>
+            <form id="access-terminal" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center;" action="#">
+                <input type="password" id="access-code" placeholder="" autocomplete="off" style="background: rgba(0,0,0,0.5); border: 1px solid var(--accent-primary); color: var(--accent-primary); padding: 15px 20px; font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; text-align: center; width: 300px; outline: none; box-shadow: 0 0 10px rgba(0,255,65,0.2) inset; transition: transform 0.1s; margin-bottom: 5px;">
+                <div style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--accent-primary); opacity: 0.6; letter-spacing: 1px; margin-bottom: 25px;">[ ENTER ACCESS CODE ]</div>
+                
+                <button type="submit" class="execute-btn" style="background: rgba(255, 0, 65, 0.1); border: 1px solid #ff0041; color: #ff0041; font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; padding: 10px 30px; cursor: pointer; text-shadow: 0 0 5px #ff0041; box-shadow: 0 0 10px rgba(255, 0, 65, 0.2) inset; transition: all 0.2s ease; letter-spacing: 2px;">[ INITIATE OVERRIDE ]</button>
+                
+                <div id="access-msg" style="color: #ff0041; font-family: 'Share Tech Mono', monospace; margin-top: 15px; height: 20px; text-shadow: 0 0 5px #ff0041;"></div>
             </form>
         </div>
     </header>
