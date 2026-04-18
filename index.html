@@ -51,12 +51,13 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const code = codeInput.value;
-            if (code === '369567') {
+            // Basic obfuscation to prevent casual plaintext scraping
+            if (btoa(code) === 'MzY5NTY3') {
                 accessMsg.style.color = '#00ff41';
                 accessMsg.style.textShadow = '0 0 5px #00ff41';
                 accessMsg.innerText = '> ACCESS GRANTED. REDIRECTING...';
                 setTimeout(() => {
-                    window.location.href = 'core.html';
+                    window.location.href = 'override_' + code + '.html';
                 }, 1000);
             } else {
                 accessMsg.style.color = '#ff0041';

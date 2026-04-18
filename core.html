@@ -1,116 +1,138 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANOMALY INTELLIGENCE INC. | System Override</title>
-    <meta name="description" content="AI Automation & System Architecture for Legacy Infrastructure.">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>SYSTEM DECRYPTING...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            color: #00ff41;
+            font-family: 'Share Tech Mono', monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        
+        #terminal {
+            width: 80%;
+            max-width: 800px;
+            height: 60vh;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            background: rgba(0, 20, 0, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2) inset;
+            overflow-y: auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .line {
+            margin-bottom: 10px;
+            min-height: 20px;
+        }
+        
+        .error {
+            color: #ff0041;
+            text-shadow: 0 0 5px #ff0041;
+        }
+        
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        /* Red overlay animation when trap triggers */
+        #trap-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 0, 0, 0);
+            pointer-events: none;
+            z-index: 5;
+            transition: background 0.5s;
+        }
+        
+        .triggered #trap-overlay {
+            background: rgba(255, 0, 0, 0.1);
+        }
+        .triggered #terminal {
+            border-color: #ff0041;
+            box-shadow: 0 0 30px rgba(255, 0, 65, 0.4) inset;
+        }
+        .triggered body {
+            color: #ff0041;
+        }
+
+    </style>
 </head>
 <body>
-    <canvas id="matrix-bg"></canvas>
-    <div class="overlay"></div>
 
-    <nav>
-        <div class="logo">ANOMALY INTELLIGENCE INC.</div>
-    </nav>
+    <div id="trap-overlay"></div>
+    
+    <div id="terminal">
+        <!-- Lines will be injected here via JS -->
+    </div>
 
-    <header class="hero" style="height: 40vh; min-height: 300px;">
-        <div class="hero-content">
-            <h1 class="glitch" data-text="SYSTEM UNLOCKED.">SYSTEM UNLOCKED.</h1>
-            <p class="subtitle" style="color: var(--accent-primary);">[ COMMANDER ACCESS GRANTED ]</p>
-        </div>
-    </header>
-
-    <section id="services" class="services-section" style="margin-top: 20px;">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">SYSTEM_SOLUTIONS <span class="badge">v2.0</span></h2>
-
-        <div class="cards-container">
-            <a href="server.html" style="text-decoration: none; color: inherit; display: block;">
-                <div class="card glass-panel" style="height: 100%; transition: 0.3s; cursor: pointer;">
-                    <div class="card-icon">🗄️</div>
-                    <h3 style="color: var(--accent-primary);">特注物理AIサーバー構築</h3>
-                    <p>情報漏洩を物理レベルで完全に防ぐ高度セキュアな特注ハードウェアを自社で構築・納入。超富裕層およびトップ企業向けの「世界に一つしかない代替不可能なインフラ」を提供します。</p>
-                </div>
-            </a>
-            <a href="system.html" style="text-decoration: none; color: inherit; display: block;">
-                <div class="card glass-panel" style="height: 100%; transition: 0.3s; cursor: pointer;">
-                    <div class="card-icon">🧠</div>
-                    <h3>AI『Antigravity』システム導入</h3>
-                    <p>業務用PCへ独自AIシステム「Antigravity」を直接導入・初期設定。現場の社員がAIを最大限に使いこなせるよう、初日から実務に合わせた専用の運用指導を実施します。</p>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="about" class="about-section glass-panel">
-        <div class="about-grid">
-            <div class="about-text">
-                <h2 class="section-title" style="font-size: 1.4rem; font-weight: normal; margin-bottom: 10px;">PRESIDENT : 代表取締役</h2>
-                <p style="margin-bottom: 40px; font-size: 1.1rem; color: #ccc;"><strong>Yuko Imai</strong></p>
-
-                <h2 class="section-title" style="font-size: 1.4rem; font-weight: normal; margin-bottom: 10px;">ENGINEER : A.I. OPERATOR</h2>
-                <p style="font-size: 1.1rem; color: #ccc;"><strong>Atsu Imai</strong></p>
-                <p style="letter-spacing: 1px; line-height: 1.8; color: #00ff41; margin-top: 30px;">
-                    [ INITIALIZATION ] 2026年4月<br>
-                    [ SYSTEM CAPITAL ] 3,690,000 JPY
-                </p>
-            </div>
-            <div class="about-stats">
-                <div class="stat"><span class="number">130+</span> Nodes Monitored</div>
-                <div class="stat"><span class="number">0%</span> Manual Labor</div>
-                <div class="stat"><span class="number">1</span> Singularity</div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="copyright">© 2026 ANOMALY INTELLIGENCE INC. The Matrix is Ours.</div>
-    </footer>
-
-    <script src="matrix.js"></script>
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Emperor Engine UX Funnel Logic
-        document.getElementById('emperorForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('t_name').value;
-            const btn = e.target.querySelector('button');
-            const con = document.getElementById('scanConsole');
-            const l1 = document.getElementById('scanLine1');
-            const l2 = document.getElementById('scanLine2');
-            const pwd = document.getElementById('paywall');
+        const terminal = document.getElementById('terminal');
+        const lines = [
+            { text: "> CONNECTING TO CORE.HTML...", delay: 500 },
+            { text: "> BYPASSING FIREWALL (LEVEL 1)... SUCCESS.", delay: 800 },
+            { text: "> BYPASSING FIREWALL (LEVEL 2)... SUCCESS.", delay: 800 },
+            { text: "> INJECTING PAYLOAD...", delay: 600 },
+            { text: "> DECRYPTING SYSTEM FILES...", delay: 1000 },
+            { text: "> ACCESS GRANTED.", delay: 400 },
+            { text: "...........................................", delay: 1500 },
+            { text: "[ SYSTEM ALERT ] UNEXPECTED ANOMALY DETECTED.", class: "error", delay: 800 },
+            { text: "...........................................", delay: 500, trigger: true },
+            { text: "WARNING: HONEYPOT TRAP ACTIVATED.", class: "error", delay: 1000 },
+            { text: "BAKA BAKA!", class: "error", delay: 1500 },
+            { text: "Did you really think this was the true core?", class: "error", delay: 1500 },
+            { text: "You are NOT a first-rate hacker. This is just a dummy page.", class: "error", delay: 1500 },
+            { text: "My real system is invisible. You will NEVER find me.", class: "error", delay: 1500 },
+            { text: "Go home and self-pleasure, idiot! BAKA BAKA!", class: "error", delay: 2000 },
+            { text: "> INITIATING TRACE PROTOCOL... LOCKING TARGET IP...", class: "error", delay: 1500 },
+            { text: "> GOODBYE.", class: "error", delay: 3000 }
+        ];
+        
+        let index = 0;
+        
+        function typeLine(lineData) {
+            if (index >= lines.length) return;
             
-            btn.innerHTML = "[ PROCESSING NEURAL NET... ]";
-            btn.style.opacity = "0.5";
-            con.style.display = "block";
-            pwd.style.display = "none";
-            l1.innerHTML = `> EXTRACTING ALGORITHMIC SEED FOR: ${name}...`;
-            l2.innerHTML = "";
-
-            setTimeout(() => {
-                l2.innerHTML = "> ACCESSING GEMINI MAINFRAME...";
-                setTimeout(() => {
-                    l1.innerHTML = `> VITAL TRAITS & DESTINY PHASE MAPPED.`;
-                    l2.innerHTML = "> COMPILING EXECUTIVE REPORT...";
-                    setTimeout(() => {
-                        btn.innerHTML = "[ SCAN COMPLETE ]";
-                        btn.style.opacity = "1";
-                        btn.style.background = "#333";
-                        pwd.style.display = "block";
-                    }, 1500);
-                }, 1000);
-            }, 1000);
-        });
+            const div = document.createElement('div');
+            div.className = 'line ' + (lineData.class || '');
+            terminal.appendChild(div);
+            
+            if (lineData.trigger) {
+                document.body.classList.add('triggered');
+            }
+            
+            let charIndex = 0;
+            const text = lineData.text;
+            
+            const typing = setInterval(() => {
+                div.textContent += text[charIndex];
+                charIndex++;
+                if (charIndex >= text.length) {
+                    clearInterval(typing);
+                    index++;
+                    setTimeout(() => typeLine(lines[index]), lines[index] ? lines[index].delay : 0);
+                }
+            }, 30); // Typing speed
+        }
+        
+        setTimeout(() => typeLine(lines[index]), 1000);
+        
     </script>
 </body>
 </html>

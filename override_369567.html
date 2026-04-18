@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANOMALY INTELLIGENCE INC. | System Override</title>
+    <meta name="description" content="AI Automation & System Architecture for Legacy Infrastructure.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="matrix-bg"></canvas>
+    <div class="overlay"></div>
+
+    <nav>
+        <div class="logo">ANOMALY INTELLIGENCE INC.</div>
+    </nav>
+
+    <header class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="SYSTEM UNLOCKED.">SYSTEM UNLOCKED.</h1>
+            <p class="subtitle" style="color: var(--accent-primary);">[ COMMANDER ACCESS GRANTED ]</p>
+        </div>
+    </header>
+
+    <section id="services" class="services-section" style="margin-top: 20px;">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">SYSTEM_SOLUTIONS <span class="badge">v2.0</span></h2>
+
+        <div class="cards-container">
+            <a href="server.html" style="text-decoration: none; color: inherit; display: block;">
+                <div class="card glass-panel" style="height: 100%; transition: 0.3s; cursor: pointer;">
+                    <div class="card-icon">🗄️</div>
+                    <h3 style="color: var(--accent-primary);">特注物理AIサーバー構築</h3>
+                    <p>情報漏洩を物理レベルで完全に防ぐ高度セキュアな特注ハードウェアを自社で構築・納入。超富裕層およびトップ企業向けの「世界に一つしかない代替不可能なインフラ」を提供します。</p>
+                </div>
+            </a>
+            <a href="system.html" style="text-decoration: none; color: inherit; display: block;">
+                <div class="card glass-panel" style="height: 100%; transition: 0.3s; cursor: pointer;">
+                    <div class="card-icon">🧠</div>
+                    <h3>AI『Antigravity』システム導入</h3>
+                    <p>業務用PCへ独自AIシステム「Antigravity」を直接導入・初期設定。現場の社員がAIを最大限に使いこなせるよう、初日から実務に合わせた専用の運用指導を実施します。</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section glass-panel">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2 class="section-title" style="font-size: 1.4rem; font-weight: normal; margin-bottom: 10px;">PRESIDENT : 代表取締役</h2>
+                <p style="margin-bottom: 40px; font-size: 1.1rem; color: #ccc;"><strong>Yuko Imai</strong></p>
+
+                <h2 class="section-title" style="font-size: 1.4rem; font-weight: normal; margin-bottom: 10px;">ENGINEER : A.I. OPERATOR</h2>
+                <p style="font-size: 1.1rem; color: #ccc;"><strong>Atsu Imai</strong></p>
+                <p style="letter-spacing: 1px; line-height: 1.8; color: #00ff41; margin-top: 30px;">
+                    [ INITIALIZATION ] 2026年4月<br>
+                    [ SYSTEM CAPITAL ] 3,690,000 JPY
+                </p>
+            </div>
+            <div class="about-stats">
+                <div class="stat"><span class="number">130+</span> Nodes Monitored</div>
+                <div class="stat"><span class="number">0%</span> Manual Labor</div>
+                <div class="stat"><span class="number">1</span> Singularity</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="copyright">© 2026 ANOMALY INTELLIGENCE INC. The Matrix is Ours.</div>
+    </footer>
+
+    <script src="matrix.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Emperor Engine UX Funnel Logic
+        document.getElementById('emperorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('t_name').value;
+            const btn = e.target.querySelector('button');
+            const con = document.getElementById('scanConsole');
+            const l1 = document.getElementById('scanLine1');
+            const l2 = document.getElementById('scanLine2');
+            const pwd = document.getElementById('paywall');
+            
+            btn.innerHTML = "[ PROCESSING NEURAL NET... ]";
+            btn.style.opacity = "0.5";
+            con.style.display = "block";
+            pwd.style.display = "none";
+            l1.innerHTML = `> EXTRACTING ALGORITHMIC SEED FOR: ${name}...`;
+            l2.innerHTML = "";
+
+            setTimeout(() => {
+                l2.innerHTML = "> ACCESSING GEMINI MAINFRAME...";
+                setTimeout(() => {
+                    l1.innerHTML = `> VITAL TRAITS & DESTINY PHASE MAPPED.`;
+                    l2.innerHTML = "> COMPILING EXECUTIVE REPORT...";
+                    setTimeout(() => {
+                        btn.innerHTML = "[ SCAN COMPLETE ]";
+                        btn.style.opacity = "1";
+                        btn.style.background = "#333";
+                        pwd.style.display = "block";
+                    }, 1500);
+                }, 1000);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
